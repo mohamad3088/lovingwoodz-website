@@ -1,19 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lovingwoodz | Luxury Wood Interiors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            sans: ['Jost', 'sans-serif'],
+          },
+          colors: {
+            wood: {
+              black: '#0C0907',
+              deep: '#1A1008',
+              dark: '#2C1E14',
+              mid: '#4A3728',
+              gold: '#C4A35A',
+              'gold-light': '#D4B96A',
+              sage: '#8F9779',
+              ivory: '#F5EFE6',
+              'ivory-dim': 'rgba(245,239,230,0.6)',
+              'ivory-muted': 'rgba(245,239,230,0.35)',
+            }
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ... (Keep your existing CSS styles here) ... */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0C0907; --deep: #1A1008; --dark: #2C1E14; --mid: #4A3728;
+      --gold: #C4A35A; --gold-light: #D4B96A; --sage: #8F9779; --ivory: #F5EFE6;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body { font-family: 'Jost', sans-serif; background-color: var(--black); color: var(--ivory); overflow-x: hidden; }
+    /* ... (Rest of your styles) ... */
+  </style>
+</head>
+<body>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="root"></div>
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
-import App from './App';
+  <script type="module" src="./index.tsx"></script>
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>
-);
+  <script>
+    // Keep your existing Cursor and Scroll Reveal scripts here
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+  </script>
+</body>
+</html>
