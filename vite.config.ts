@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      base: '/lovingwoodz-website/', // This ensures assets are loaded correctly from your subfolder
       server: {
         port: 3000,
         host: '0.0.0.0',
